@@ -56,8 +56,8 @@
         <div>Loading, please wait...</div>
     </div>
     <div class="buttons" id="mybuttons">
-        <button id="btnPlay" class="say-hi-button" onclick="VideoPlay(vid1)">開始</button>
-        <button id="btnStop" class="say-hi-button" onclick="VideoPause(vid1)">暫停</button>
+        <button id="btnPlay" class="say-hi-button">開始</button>
+        <button id="btnStop" class="say-hi-button" onclick="pausevideo(vid1)">暫停</button>
     </div>
     <a-scene vr-mode-ui="enabled: false;" renderer="antialias: true; alpha: true; precision: mediump;" embedded
         arjs="trackingMethod: best; sourceType: webcam; debugUIEnabled: false;">
@@ -83,11 +83,17 @@
         var isiOS = !!u.match(/\(i[^;]+;( U;)? CPU.+Mac OS X/); //ios終端
         // if (isiOS) alert("ios")
         // else alert("android")
-        function VideoPlay(vid) {
-            document.getElementById(vid).play()
+        function playvideo(vidnum) {
+            var videoEl_1 = document.querySelector('#' + vidnum);
+            videoEl_1.play();
         }
-        function VideoPause(vid) {
-            document.getElementById(vid).pause()
+        document.getElementById("btnPlay").addEventListener("click", function (e) {
+            alert("clickplay")
+            document.getElementById("vid1").play()
+        });
+        function pausevideo(vidnum) {
+            var videoEl_1 = document.querySelector('#' + vidnum);
+            videoEl_1.pause();
         }
         window.onload = function () {
             if (isiOS) { document.getElementById("mybuttons").style.display = "flex"; }

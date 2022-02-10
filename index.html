@@ -33,7 +33,7 @@
         left: 0;
         width: 100%;
         height: 5em;
-        display: flex;
+        display: none;
         justify-content: center;
         align-items: center;
         z-index: 10;
@@ -57,7 +57,7 @@
     </div>
     <div class="buttons" id="mybuttons">
         <button id="btnPlay" class="say-hi-button">開始</button>
-        <button id="btnStop" class="say-hi-button" onclick="pausevideo(vid1)">暫停</button>
+        <button id="btnStop" class="say-hi-button" onclick="pausevideo('vid1')">暫停</button>
     </div>
     <a-scene vr-mode-ui="enabled: false;" renderer="antialias: true; alpha: true; precision: mediump;" embedded
         arjs="trackingMethod: best; sourceType: webcam; debugUIEnabled: false;">

@@ -140,10 +140,10 @@
                 init: function () {
                     var marker = this.el;
 
-                    this.vid = document.querySelector("#vid1");
+                    // this.vid = document.querySelector("#vid1");
 
                     marker.addEventListener("markerFound", function () {
-                        this.vid.play();
+                        document.querySelector("#vid1").play();
                     }.bind(this));
 
                     marker.addEventListener("markerLost", function () {

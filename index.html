@@ -147,8 +147,8 @@
                     }.bind(this));
 
                     marker.addEventListener("markerLost", function () {
-                        this.vid.pause();
-                        this.vid.currentTime = 0;
+                        document.querySelector("#vid1").pause();
+                        document.querySelector("#vid1").currentTime = 0;
                     }.bind(this));
                 }
             });

@@ -66,6 +66,7 @@
             <a-video src="#vid1" position="150 -200 -300" rotation="-90 0 0" play="true" width=457.5 height=405>
             </a-video>
         </a-nft>
+
         <a-assets>
             <video id="vid1" src="assets/AR 測試2.mp4" preload="auto" autoplay="false" loop="true"
                 response-type="arraybuffer" crossorigin webkit-playsinline playsinline>
@@ -99,7 +100,7 @@
                     this.vid = document.querySelector("#vid1");
 
                     marker.addEventListener("markerFound", function () {
-                        alert("play")
+                        alert("A")
                         this.vid.play();
                     }.bind(this));
 

@@ -3,7 +3,7 @@
 
 <head>
     <meta charset="UTF-8">
-    <meta name="apple-mobile-web-app-capable" content="yes">
+    <!-- <meta name="apple-mobile-web-app-capable" content="yes"> -->
     <title>WEBAR II</title>
     <script
         src="https://cdn.jsdelivr.net/gh/aframevr/aframe@1c2407b26c61958baa93967b5412487cd94b290b/dist/aframe-master.min.js"></script>
@@ -77,10 +77,10 @@
             <a-entity camera></a-entity>
         </a-scene>
         <script>
-            var u = navigator.userAgent;
-            var isiOS = !!u.match(/\(i[^;]+;( U;)? CPU.+Mac OS X/); //ios終端
-            if (isiOS) alert("ios")
-            else alert("android")
+            // var u = navigator.userAgent;
+            // var isiOS = !!u.match(/\(i[^;]+;( U;)? CPU.+Mac OS X/); //ios終端
+            // if (isiOS) alert("ios")
+            // else alert("android")
             window.onload = function () {
                 AFRAME.registerComponent("videohandler01", {
                     init: function () {
@@ -90,6 +90,7 @@
 
                         marker.addEventListener("markerFound", function () {
                             this.vid.play();
+                            alert("found")
                         }.bind(this));
 
                         marker.addEventListener("markerLost", function () {

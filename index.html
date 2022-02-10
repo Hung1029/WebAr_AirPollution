@@ -100,6 +100,7 @@
                     this.vid = document.querySelector("#vid1");
 
                     marker.addEventListener("markerFound", function () {
+                        document.getElementById("mybuttons").style.background = "blue";
                         this.vid.play();
                     }.bind(this));
 

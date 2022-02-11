@@ -93,14 +93,14 @@
             <span class="button">貓貓</span></label>
     </div>
     <div class="buttons mybuttons" id="mybuttons-01">
-        <button id="btnPlay" class="say-hi-button" onclick="playvideo('vid1')">黑白開始</button>
-        <button id="btnStop" class="say-hi-button" onclick="pausevideo('vid1')">黑白暫停</button>
-        <button id="btnStop" class="say-hi-button" onclick="pausevideo('vid1')">黑白重頭</button>
+        <button class="say-hi-button" onclick="playvideo('vid1')">黑白開始</button>
+        <button class="say-hi-button" onclick="pausevideo('vid1')">黑白暫停</button>
+        <button class="say-hi-button" onclick="revideo('vid1')">黑白重頭</button>
     </div>
     <div class="buttons mybuttons" id="mybuttons-02">
-        <button id="btnPlay" class="say-hi-button" onclick="playvideo('vid2')">貓貓開始</button>
-        <button id="btnStop" class="say-hi-button" onclick="pausevideo('vid2')">貓貓暫停</button>
-        <button id="btnStop" class="say-hi-button" onclick="pausevideo('vid2')">貓貓重頭</button>
+        <button class="say-hi-button" onclick="playvideo('vid2')">貓貓開始</button>
+        <button class="say-hi-button" onclick="pausevideo('vid2')">貓貓暫停</button>
+        <button class="say-hi-button" onclick="revideo('vid2')">貓貓重頭</button>
     </div>
     <a-scene vr-mode-ui="enabled: false;" renderer="antialias: true; alpha: true; precision: mediump;" embedded
         arjs="trackingMethod: best; sourceType: webcam; debugUIEnabled: false;">
@@ -139,6 +139,10 @@
         function pausevideo(vidnum) {
             var videoEl_1 = document.querySelector('#' + vidnum);
             videoEl_1.pause();
+        }
+        function revideo(vidnum) {
+            var videoEl_1 = document.querySelector('#' + vidnum);
+            videoEl_1.currentTime = 0;
         }
         function videocheck() {
             var label = document.querySelector('input[name = "label"]:checked').value;

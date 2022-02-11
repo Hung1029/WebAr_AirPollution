@@ -80,6 +80,10 @@
         background-position: center center;
         background-image: url(https://img95.699pic.com/element/40155/7210.png_300.png);
     }
+
+    .btnim {
+        height: 100%;
+    }
 </style>
 
 <body style="margin : 0px; overflow: hidden;">
@@ -94,25 +98,31 @@
     </div>
     <div class="buttons mybuttons" id="mybuttons-01">
         <button class="say-hi-button" onclick="playvideo('vid1')">黑白開始</button>
-        <button class="say-hi-button" onclick="pausevideo('vid1')">黑白暫停</button>
+        <button class="say-hi-button" onclick="pausevideo('vid1')">
+            <img class="btnim" src="https://cdn-icons-png.flaticon.com/512/61/61039.png">
+        </button>
         <button class="say-hi-button" onclick="revideo('vid1')">黑白重頭</button>
     </div>
     <div class="buttons mybuttons" id="mybuttons-02">
         <button class="say-hi-button" onclick="playvideo('vid2')">貓貓開始</button>
-        <button class="say-hi-button" onclick="pausevideo('vid2')">貓貓暫停</button>
+        <button class="say-hi-button" onclick="pausevideo('vid2')">
+            <img class="btnim" src="https://cdn-icons-png.flaticon.com/512/61/61039.png">
+        </button>
         <button class="say-hi-button" onclick="revideo('vid2')">貓貓重頭</button>
     </div>
     <a-scene vr-mode-ui="enabled: false;" renderer="antialias: true; alpha: true; precision: mediump;" embedded
         arjs="trackingMethod: best; sourceType: webcam; debugUIEnabled: false;">
         <a-nft videohandler01 type="nft" url="./data/01" smooth="true" smoothCount="10" smoothTolerance=".01"
             smoothThreshold="5">
-            <a-video src="#vid1" position="150 -200 -300" rotation="-90 0 0" play="true" width=288 height=198>
+            <a-video class="myvid" src="#vid1" position="150 -200 -300" rotation="-90 0 0" play="true" width=288
+                height=198>
             </a-video>
         </a-nft>
 
         <a-nft videohandler0209 type="nft" url="./data/0209" smooth="true" smoothCount="10" smoothTolerance=".01"
             smoothThreshold="5">
-            <a-video src="#vid2" position="150 -200 -300" rotation="-90 0 0" play="true" width=457.5 height=405>
+            <a-video class="myvid" src="#vid2" position="150 -200 -300" rotation="-90 0 0" play="true" width=457.5
+                height=405>
             </a-video>
         </a-nft>
 
@@ -150,8 +160,11 @@
             for (i = 0; i < lists.length; ++i) {
                 lists[i].style.display = "none";
             }
-
-            console.log(lists)
+            var vids = document.querySelectorAll(".myvid")
+            for (i = 0; i < vids.length; ++i) {
+                vids[i].pause();
+                vids[i].currentTime = 0;
+            }
             if (label == "01") {
                 console.log(label); document.getElementById("mybuttons-01").style.display = "flex";
             }

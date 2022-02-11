@@ -49,30 +49,75 @@
         height: 2em;
         margin: 0.25em;
     }
+
+    #mybuttongroup {
+        display: flex;
+        bottom: 50px;
+    }
+
+    #mybuttongroup input[type="radio"] {
+        display: none;
+    }
+
+    #mybuttongroup input:checked+.button {
+        background: #5e7380;
+        color: #fff;
+        cursor: default;
+        background-size: cover;
+        background-position: center center;
+        background-image: url(https://img.lovepik.com/element/40125/0624.png_300.png);
+    }
+
+    #mybuttongroup .button {
+        border-radius: 10px;
+        display: inline-block;
+        margin: 0.25em;
+        padding: 0px 15px;
+        background: #f7f7f7;
+        color: #333;
+        cursor: pointer;
+        background-size: cover;
+        background-position: center center;
+        background-image: url(https://img95.699pic.com/element/40155/7210.png_300.png);
+    }
 </style>
 
 <body style="margin : 0px; overflow: hidden;">
     <div class="arjs-loader">
         <div>Loading, please wait...</div>
     </div>
-    <div class="buttons" id="mybuttons">
-        <button id="btnPlay" class="say-hi-button" onclick="playvideo('vid1')">開始</button>
-        <button id="btnStop" class="say-hi-button" onclick="pausevideo('vid1')">暫停</button>
+    <div class="buttons" id="mybuttongroup">
+        <label><input type="radio" name="label" value="01" onclick="videocheck()" checked="checked">
+            <span class="button">黑白</span></label>
+        <label><input type="radio" name="label" value="02" onclick="videocheck()">
+            <span class="button">貓貓</span></label>
+    </div>
+    <div class="buttons mybuttons" id="mybuttons-01">
+        <button id="btnPlay" class="say-hi-button" onclick="playvideo('vid1')">黑白開始</button>
+        <button id="btnStop" class="say-hi-button" onclick="pausevideo('vid1')">黑白暫停</button>
+        <button id="btnStop" class="say-hi-button" onclick="pausevideo('vid1')">黑白重頭</button>
+    </div>
+    <div class="buttons mybuttons" id="mybuttons-02">
+        <button id="btnPlay" class="say-hi-button" onclick="playvideo('vid2')">貓貓開始</button>
+        <button id="btnStop" class="say-hi-button" onclick="pausevideo('vid2')">貓貓暫停</button>
+        <button id="btnStop" class="say-hi-button" onclick="pausevideo('vid2')">貓貓重頭</button>
     </div>
     <a-scene vr-mode-ui="enabled: false;" renderer="antialias: true; alpha: true; precision: mediump;" embedded
         arjs="trackingMethod: best; sourceType: webcam; debugUIEnabled: false;">
-        <a-nft videohandler0209 type="nft" url="./data/0209" smooth="true" smoothCount="10" smoothTolerance=".01"
+        <a-nft videohandler01 type="nft" url="./data/01" smooth="true" smoothCount="10" smoothTolerance=".01"
             smoothThreshold="5">
-            <a-video src="#vid1" position="150 -200 -300" rotation="-90 0 0" play="true" width=457.5 height=405>
+            <a-video src="#vid1" position="150 -200 -300" rotation="-90 0 0" play="true" width=288 height=198>
             </a-video>
         </a-nft>
-        <a-nft videohandler0210 type="nft" url="./data/01" smooth="true" smoothCount="10" smoothTolerance=".01"
-        smoothThreshold="5">
-        <a-video src="#vid2" position="150 -200 -300" rotation="-90 0 0" play="true" width=457.5 height=405>
-        </a-video>
-    </a-nft>
+
+        <a-nft videohandler0209 type="nft" url="./data/0209" smooth="true" smoothCount="10" smoothTolerance=".01"
+            smoothThreshold="5">
+            <a-video src="#vid2" position="150 -200 -300" rotation="-90 0 0" play="true" width=457.5 height=405>
+            </a-video>
+        </a-nft>
+
         <a-assets>
-            <video id="vid1" src="assets/AR 測試2.mp4" preload="auto" autoplay="false" loop="true"
+            <video id="vid1" src="assets/AR_Test 01.mp4" preload="auto" autoplay="false" loop="true"
                 response-type="arraybuffer" crossorigin webkit-playsinline playsinline>
             </video>
             <video id="vid2" src="assets/AR_Test 02.mp4" preload="auto" autoplay="false" loop="true"
@@ -85,8 +130,8 @@
     <script>
         var u = navigator.userAgent;
         var isiOS = !!u.match(/\(i[^;]+;( U;)? CPU.+Mac OS X/); //ios終端
-        if (isiOS) alert("ios")
-        else alert("android")
+        // if (isiOS) alert("ios")
+        // else alert("android")
         function playvideo(vidnum) {
             var videoEl_1 = document.querySelector('#' + vidnum);
             videoEl_1.play();
@@ -95,40 +140,56 @@
             var videoEl_1 = document.querySelector('#' + vidnum);
             videoEl_1.pause();
         }
+        function videocheck() {
+            var label = document.querySelector('input[name = "label"]:checked').value;
+            var lists = document.querySelectorAll(".mybuttons")
+            for (i = 0; i < lists.length; ++i) {
+                lists[i].style.display = "none";
+            }
+
+            console.log(lists)
+            if (label == "01") {
+                console.log(label); document.getElementById("mybuttons-01").style.display = "flex";
+            }
+            else if (label == "02") {
+                console.log(label); document.getElementById("mybuttons-02").style.display = "flex";
+            }
+
+        }
         window.onload = function () {
-            if (isiOS) { document.getElementById("mybuttons").style.display = "flex"; }
-            AFRAME.registerComponent("videohandler0209", {
-                init: function () {
-                    var marker = this.el;
+            videocheck();
+            // AFRAME.registerComponent("videohandler01", {
+            //     init: function () {
+            //         var marker = this.el;
 
-                    this.vid = document.querySelector("#vid1");
+            //         this.vid = document.querySelector("#vid1");
 
-                    marker.addEventListener("markerFound", function () {
-                        this.vid.play();
-                    }.bind(this));
+            //         marker.addEventListener("markerFound", function () {
+            //             this.vid.play();
+            //         }.bind(this));
 
-                    marker.addEventListener("markerLost", function () {
-                        this.vid.pause();
-                        this.vid.currentTime = 0;
-                    }.bind(this));
-                }
-            });
-            AFRAME.registerComponent("videohandler0210", {
-                init: function () {
-                    var marker = this.el;
+            //         marker.addEventListener("markerLost", function () {
+            //             this.vid.pause();
+            //             this.vid.currentTime = 0;
+            //         }.bind(this));
+            //     }
+            // });
+            // AFRAME.registerComponent("videohandler0209", {
+            //     init: function () {
+            //         var marker = this.el;
 
-                    this.vid = document.querySelector("#vid2");
+            //         this.vid = document.querySelector("#vid2");
 
-                    marker.addEventListener("markerFound", function () {
-                        this.vid.play();
-                    }.bind(this));
+            //         marker.addEventListener("markerFound", function () {
+            //             this.vid.play();
+            //         }.bind(this));
 
-                    marker.addEventListener("markerLost", function () {
-                        this.vid.pause();
-                        this.vid.currentTime = 0;
-                    }.bind(this));
-                }
-            });
+            //         marker.addEventListener("markerLost", function () {
+            //             this.vid.pause();
+            //             this.vid.currentTime = 0;
+            //         }.bind(this));
+            //     }
+            // });
         };
     </script>
 </body>
